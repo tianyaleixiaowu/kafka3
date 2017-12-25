@@ -19,7 +19,7 @@ RUN mkdir -p $WORK_PATH
 COPY ./start_server.sh $WORK_PATH/
 
 #把kafka压缩文件复制到工作目录
-MV /$KAFKA_PACKAGE_NAME.tgz $WORK_PATH/
+ADD /$KAFKA_PACKAGE_NAME.tgz $WORK_PATH/
 
 #解压缩
 RUN tar -xvf $WORK_PATH/$KAFKA_PACKAGE_NAME.tgz -C $WORK_PATH/
