@@ -28,7 +28,7 @@ RUN tar -xvf $WORK_PATH/$KAFKA_PACKAGE_NAME.tgz -C $WORK_PATH/
 RUN rm $WORK_PATH/$KAFKA_PACKAGE_NAME.tgz
 
 #执行sed命令修改文件，将连接zk的ip改为link参数对应的zookeeper容器的别名
-RUN sed -i 's/zookeeper.connect=localhost:2181/zookeeper.connect=zkhost:2181/g' $WORK_PATH/$KAFKA_PACKAGE_NAME/config/server.properties
+#RUN sed -i 's/zookeeper.connect=localhost:2181/zookeeper.connect=zkhost:2181/g' $WORK_PATH/$KAFKA_PACKAGE_NAME/config/server.properties
 
 #给shell赋予执行权限
 RUN chmod a+x $WORK_PATH/start_server.sh
