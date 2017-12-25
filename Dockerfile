@@ -8,22 +8,25 @@ MAINTAINER wuwf <272551766@qq.com>
 ENV WORK_PATH /usr/local/work
 
 #定义kafka文件夹名称
-ENV KAFKA_PACKAGE_NAME kafka_2.11-1.0.0
+ENV KAFKA_PACKAGE_NAME kafka-1.0
 
 #创建工作目录
 RUN mkdir -p $WORK_PATH
+
+#安装zip
+RUN apt-get install zip
 
 #把启动server的shell复制到工作目录
 COPY ./start_server.sh $WORK_PATH/
 
 #把kafka压缩文件复制到工作目录
-COPY ./$KAFKA_PACKAGE_NAME.tgz $WORK_PATH/
+COPY ./$KAFKA_PACKAGE_NAME.zip $WORK_PATH/
 
 #解压缩
-RUN tar -xvf $WORK_PATH/$KAFKA_PACKAGE_NAME.tgz -C $WORK_PATH/
+RUN unzip -o -d $WORK_PATH/ $WORK_PATH/$KAFKA_PACKAGE_NAME.zip
 
 #删除压缩文件
-RUN rm $WORK_PATH/$KAFKA_PACKAGE_NAME.tgz
+RUN rm $WORK_PATH/$KAFKA_PACKAGE_NAME.zip
 
 #执行sed命令修改文件，将连接zk的ip改为link参数对应的zookeeper容器的别名
 RUN sed -i 's/zookeeper.connect=localhost:2181/zookeeper.connect=zkhost:2181/g' $WORK_PATH/$KAFKA_PACKAGE_NAME/config/server.properties
