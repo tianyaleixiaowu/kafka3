@@ -13,9 +13,6 @@ ENV KAFKA_PACKAGE_NAME kafka-1.0
 #创建工作目录
 RUN mkdir -p $WORK_PATH
 
-#安装zip
-RUN apt-get install zip
-
 #把启动server的shell复制到工作目录
 COPY ./start_server.sh $WORK_PATH/
 
