@@ -10,7 +10,7 @@ ENV WORK_PATH /usr/local/work
 RUN wget http://mirrors.tuna.tsinghua.edu.cn/apache/kafka/1.0.0/kafka_2.12-1.0.0.tgz
 
 #定义kafka文件夹名称
-ENV KAFKA_PACKAGE_NAME kafka_2.12-1.0.0.tgz
+ENV KAFKA_PACKAGE_NAME kafka_2.12-1.0.0
 
 #创建工作目录
 RUN mkdir -p $WORK_PATH
@@ -19,7 +19,7 @@ RUN mkdir -p $WORK_PATH
 COPY ./start_server.sh $WORK_PATH/
 
 #把kafka压缩文件复制到工作目录
-COPY /$KAFKA_PACKAGE_NAME.tgz $WORK_PATH/
+COPY $KAFKA_PACKAGE_NAME.tgz $WORK_PATH/
 
 #解压缩
 RUN tar -xvf $WORK_PATH/$KAFKA_PACKAGE_NAME.tgz -C $WORK_PATH/
